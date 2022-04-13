@@ -17,8 +17,14 @@ function App() {
 
   return (
     <div>
-      <button style={{ backgroundColor: buttonColor }} onClick={() => changeColor()} disabled={isDisabled}>{`Change to ${buttonColor === 'red' ? 'blue' : 'red'}`}</button>
-      <input type="checkbox" onchange={() => toggleDisabled()} />
+      <button style={{ backgroundColor: buttonColor }} onClick={() => changeColor()} disabled={isDisabled}>{`Change to ${buttonColor === 'red' ? 'blue' : 'red'}`} </button>
+      <input
+        type="checkbox"
+        id="disable-button-checkbox"
+        defaultChecked={isDisabled}
+        aria-checked={isDisabled}
+        onChange={() => toggleDisabled()} />
+      <label htmlFor="disable-button-checkbox">Disable button</label>
     </div>
   );
 }
