@@ -43,10 +43,31 @@ test('initial conditions', () => {
 })
 
 test('checkbox disabling functionalities', () => {
-  // click and check if button is disabled
+  render(<App />);
 
+  const colorButton = screen.getByRole('button', { name: /change to blue/i });
+  const checkbox = screen.getByRole('checkbox'); 
+
+  expect(colorButton).toBeEnabled();
+
+  // click and check if button is disabled
+  fireEvent(checkbox,
+    new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+    })
+  )
+
+  expect(colorButton).toBeDisabled();
 
   // click again and test if the button is enabled
-  
+  fireEvent(checkbox,
+    new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+    })
+  )
+
+  expect(colorButton).toBeEnabled();
 
 })
