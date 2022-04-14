@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
+import { replaceCamelWithSpaces } from './App';
 
 test('button has correct initial color', () => {
   // render create a virtual dom that creates
@@ -69,5 +70,41 @@ test('checkbox disabling functionalities', () => {
   )
 
   expect(colorButton).toBeEnabled();
-
 })
+
+test('button change color to grey when enabled/disabled', () => {
+  render(<App />);
+
+  const colorButton = screen.getByRole('button', { name: /change to blue/i });
+  const checkbox = screen.getByRole('checkbox', { name: /disable button/i });
+
+  expect(colorButton).toBeEnabled();
+  expect(colorButton).toHaveStyle({ backgroundColor: 'red' });
+
+
+  fireEvent.click(checkbox);
+
+  expect(colorButton).toBeDisabled();
+  expect(colorButton).toHaveStyle({ backgroundColor: 'grey' });
+
+  fireEvent.click(checkbox);
+
+  expect(colorButton).toBeEnabled();
+  expect(colorButton).toHaveStyle({ backgroundColor: 'red' });
+})
+
+// create function to take string in camel case and separate with spaces
+describe('space before camel-case capital letters', () => {
+  test('test string with no capital letters', () => {
+    expect(replaceCamelWithSpaces('red')).toBe('red');
+  })
+
+  test('test string with one capital letters', () => {
+    expect(replaceCamelWithSpaces('redBlue')).toBe('red Blue');
+  })
+
+  test('test string with multiple capital letters', () => {
+    expect(replaceCamelWithSpaces('redBlueGreen')).toBe('red Blue Green');
+  })
+})
+

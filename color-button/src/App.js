@@ -2,6 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
+export function replaceCamelWithSpaces(colorName) {
+  return colorName.replace(/([A-Z])/g, ' $1');
+}
+
 function App() {
   const [buttonColor, setButtonColor] = useState("red");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -11,8 +15,9 @@ function App() {
     setButtonColor(newButtonColor);
   };
 
-  const toggleDisabled = () => {
-    setIsDisabled(!isDisabled);
+  const toggleDisabled = (checked) => {
+    setIsDisabled(checked);
+    setButtonColor(checked ? 'grey' : 'red');
   }
 
   return (
@@ -23,7 +28,7 @@ function App() {
         id="disable-button-checkbox"
         defaultChecked={isDisabled}
         aria-checked={isDisabled}
-        onChange={() => toggleDisabled()} />
+        onChange={(e) => toggleDisabled(e.target.checked ? true : false)} />
       <label htmlFor="disable-button-checkbox">Disable button</label>
     </div>
   );
