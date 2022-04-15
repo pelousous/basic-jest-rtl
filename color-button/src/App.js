@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
@@ -22,7 +21,7 @@ function App() {
 
   return (
     <div>
-      <button style={{ backgroundColo r: buttonColor }} onClick={() => changeColor()} disabled={isDisabled}>{`Change to ${buttonColor === 'MediumVioletRed' ? replaceCamelWithSpaces('MidnightBlue') : replaceCamelWithSpaces('MediumVioletRed')}`} </button>
+      <button style={{ backgroundColor: buttonColor }} onClick={() => changeColor()} disabled={isDisabled}>{`Change to ${buttonColor === 'MediumVioletRed' ? replaceCamelWithSpaces('MidnightBlue') : replaceCamelWithSpaces('MediumVioletRed')}`} </button>
       <input
         type="checkbox"
         id="disable-button-checkbox"
