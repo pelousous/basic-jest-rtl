@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ScoopOptions } from "./ScoopOptions";
+import { ToppingOptions } from "./ToppingOptions";
 
 // complete use component
 // with bootstrap col
@@ -14,13 +15,14 @@ export const Options = ({ optionType }) => {
   }, [optionType]);
 
   //const ItemComponent = optionsType === "scoops" ? ScoopOptions : null;
-
+  const ItemComponent =
+    optionType === "scoops" ? ScoopOptions : ToppingOptions;
   return (
     <div>
       {options &&
         options.map((option) => {
           return (
-            <ScoopOptions
+            <ItemComponent
               key={option.name}
               name={option.name}
               imagePath={option.imagePath}
