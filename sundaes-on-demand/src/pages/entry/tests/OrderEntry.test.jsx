@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import OrderEntry from "../OrderEntry";
 import { server } from "../../../mocks/server";
 import { rest } from "msw";
@@ -15,7 +15,9 @@ test("handling error on scoop options and toppings options", async () => {
 
   render(<OrderEntry />);
 
-  const alerts = await screen.findAllByRole("alert");
+  await waitFor(async () => {
+    const alerts = await screen.findAllByRole("alert");
 
-  expect(alerts).toHaveLength(2);
+    expect(alerts).toHaveLength(2);
+  });
 });
