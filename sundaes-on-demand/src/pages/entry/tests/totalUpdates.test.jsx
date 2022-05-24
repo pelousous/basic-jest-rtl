@@ -1,9 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Options } from "../Options";
+import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
 
 test("updates scoop subtotal when scoop changes", async () => {
-  render(<Options optionType="scoops" />);
+  // Pass a React Component as the wrapper option to have it rendered around the inner element.
+  // refs: https://testing-library.com/docs/react-testing-library/setup#custom-render
+  render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
 
   // if exact: true by default check only if match
   // entirely and not partially
@@ -17,19 +20,19 @@ test("updates scoop subtotal when scoop changes", async () => {
 
   // we need to clear the input before type in
   // just to be sure to enter the correct text
-  userEvent.clear(vanillaInput);
-  userEvent.type(vanillaInput, "1");
+  await userEvent.clear(vanillaInput);
+  await userEvent.type(vanillaInput, "1");
   // check the text partially
   expect(scoopSubTotal).toHaveTextContent("2.00");
 
-  // update chocolate scoops to 2 and chck subtotal
+  // update chocolate scoops to 2 and check subtotal
   const chocolateInput = await screen.findByRole("spinbutton", {
     name: "Chocolate",
   });
 
-  userEvent.clear(chocolateInput);
-  userEvent.type(chocolateInput, "2");
-  expect(scoopSubTotal).toHaveTextContent("4.00");
+  await userEvent.clear(chocolateInput);
+  await userEvent.type(chocolateInput, "2");
+  expect(scoopSubTotal).toHaveTextContent("6.00");
 
   // toppings
 

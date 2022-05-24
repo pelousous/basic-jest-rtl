@@ -12,6 +12,8 @@ export const Options = ({ optionType }) => {
   const [error, setError] = useState(false);
   const [orderDetails, updateItemCount] = useOrderDetails();
 
+  console.log('orderDetails: ', orderDetails);
+
   useEffect(() => {
     axios
       .get(`http://localhost:3030/${optionType}`)
@@ -34,7 +36,7 @@ export const Options = ({ optionType }) => {
       <h2>{optionType}</h2>
       <p>{pricePerItem[optionType]} each</p>
       <p>
-        Total for type {optionType}: {orderDetails.totals[optionType]}
+        {optionType} total: {orderDetails.totals[optionType]}
       </p>
       {options &&
         options.map((option) => {

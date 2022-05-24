@@ -2,17 +2,17 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
-export const ScoopOptions = ({ name, imagePath, updateItemCount }) => {
+export const ToppingOptions = ({ name, imagePath, updateItemCount }) => {
   const handleChange = (e) => {
-    updateItemCount(name, e.target.value);
+    console.log("item target", e.target.value);
+    updateItemCount(name, 2);
   };
-
   return (
     <Col xs={12} sm={6} md={4} lg={3} style={{ textAlign: "center" }}>
       <img
         style={{ width: "75%" }}
         src={`http://localhost:3030/${imagePath}`}
-        alt={`${name} scoop`}
+        alt={`${name} topping`}
       />
       <Form.Group
         controlId={`${name}-count`}
