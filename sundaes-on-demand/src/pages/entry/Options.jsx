@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useOrderDetails, pricePerItem } from "../../contexts/OrderDetails";
 import AlertBanner from "../common/AlertBanner";
 import { ScoopOptions } from "./ScoopOptions";
 import { ToppingOptions } from "./ToppingOptions";
@@ -9,6 +10,7 @@ import { ToppingOptions } from "./ToppingOptions";
 export const Options = ({ optionType }) => {
   const [options, setOptions] = useState([]);
   const [error, setError] = useState(false);
+  const [orderDetails, updateItemCount] = useOrderDetails();
 
   useEffect(() => {
     axios
@@ -29,10 +31,18 @@ export const Options = ({ optionType }) => {
   const ItemComponent = optionType === "scoops" ? ScoopOptions : ToppingOptions;
   return (
     <div>
+      <h2>{optionType}</h2>
+      <p>{pricePerItem[optionType]} each</p>
+      <p>
+        Total for type {optionType}: {orderDetails.totals[optionType]}
+      </p>
       {options &&
         options.map((option) => {
           return (
             <ItemComponent
+              updateItemCount={(itemName, newItemCount) =>
+                updateItemCount(itemName, newItemCount, optionType)
+              }
               key={option.name}
               name={option.name}
               imagePath={option.imagePath}

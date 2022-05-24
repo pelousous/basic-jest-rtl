@@ -22,7 +22,7 @@ export function useOrderDetails() {
 }
 
 
-functionCalculateSubtotal(optionType, optionCounts) {
+function calculateSubtotal(optionType, optionCounts) {
     let optionCount = 0;
 
     for (const count of optionsCounts[optionType].values()) {
@@ -76,7 +76,7 @@ export function OrderDetailsProvider(props) {
 
         // return getter and setter
         return [{ ...optionCounts, totals }, updateItemCount];
-    }, [optionCounts]);
+    }, [optionCounts, totals]);
 
     return <OrderDetails.Provider value={value} {...props} />
 }
