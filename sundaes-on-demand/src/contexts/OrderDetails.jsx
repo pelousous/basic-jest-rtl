@@ -34,7 +34,7 @@ export function useOrderDetails() {
 
 function calculateSubtotal(optionType, optionCounts) {
   let optionCount = 0;
-  console.log("optionType ", optionType);
+  //console.log("optionType ", optionType);
   for (const count of optionCounts[optionType].values()) {
     optionCount += count;
   }
@@ -62,7 +62,7 @@ export function OrderDetailsProvider(props) {
     const toppingsSubtotal = calculateSubtotal("toppings", optionCounts);
     const grandTotal = scoopsSubtotal + toppingsSubtotal;
 
-    console.log("scoopsSubtotal: ", scoopsSubtotal);
+    //console.log("toppingsSubtotal: ", toppingsSubtotal);
 
     setTotals({
       scoops: formatter.format(scoopsSubtotal),
@@ -77,7 +77,6 @@ export function OrderDetailsProvider(props) {
 
       // update option count for this item with new value
       const optionCountsMap = optionCounts[optionType];
-      console.log("newItemCount ", newItemCount);
       optionCountsMap.set(itemName, parseInt(newItemCount));
       setOptionsCounts(newOptionsCounts);
     }

@@ -4,8 +4,7 @@ import Row from "react-bootstrap/Row";
 
 export const ToppingOptions = ({ name, imagePath, updateItemCount }) => {
   const handleChange = (e) => {
-    console.log("item target", e.target.value);
-    updateItemCount(name, 2);
+    updateItemCount(name, e.target.checked ? 1 : 0);
   };
   return (
     <Col xs={12} sm={6} md={4} lg={3} style={{ textAlign: "center" }}>
@@ -23,8 +22,8 @@ export const ToppingOptions = ({ name, imagePath, updateItemCount }) => {
           {name}
         </Form.Label>
         <Col xs="5" style={{ textAlign: "left" }}>
-          <Form.Control
-            type="number"
+          <Form.Check
+            type="checkbox"
             defaultValue={0}
             onChange={handleChange}
           />

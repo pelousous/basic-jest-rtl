@@ -1,3 +1,4 @@
+// CUSTOM RENDER https://testing-library.com/docs/react-testing-library/setup
 import { render, screen } from "../../../test-utils/test-utils";
 import userEvent from "@testing-library/user-event";
 import { Options } from "../Options";
@@ -6,7 +7,7 @@ import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
 test("updates scoop subtotal when scoop changes", async () => {
   // Pass a React Component as the wrapper option to have it rendered around the inner element.
   // refs: https://testing-library.com/docs/react-testing-library/setup#custom-render
-  render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
+  render(<Options optionType="scoops" />);
 
   // if exact: true by default check only if match
   // entirely and not partially
@@ -47,4 +48,30 @@ test("updates scoop subtotal when scoop changes", async () => {
   // userEvent.type(gummiInput, "1");
 
   // expect(toppingsSubtotal).toHaveTextContent("1.50");
+});
+
+test("update toppings subtotal when toppings changes", async () => {
+  render(<Options optionType="toppings" />);
+
+  const toppingsSubtotal = screen.getByText("Toppings total: $", {
+    exact: false,
+  });
+
+  expect(toppingsSubtotal).toHaveTextContent("0.00");
+
+  const cherriesCheckbox = await screen.findByRole("checkbox", {
+    name: "Cherries",
+  });
+
+  await userEvent.click(cherriesCheckbox);
+  expect(toppingsSubtotal).toHaveTextContent("1.50");
+
+  const hotFudgeCheckbox = await screen.findByRole("checkbox", {
+    name: "Hot fudge",
+  });
+  await userEvent.click(hotFudgeCheckbox);
+  expect(toppingsSubtotal).toHaveTextContent("3.00");
+
+  await userEvent.click(cherriesCheckbox);
+  expect(toppingsSubtotal).toHaveTextContent("1.50");
 });

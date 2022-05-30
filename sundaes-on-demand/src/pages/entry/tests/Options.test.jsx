@@ -1,3 +1,4 @@
+// CUSTOM RENDER https://testing-library.com/docs/react-testing-library/setup
 import { render, screen } from "../../../test-utils/test-utils";
 import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
 import { Options } from "../Options";
