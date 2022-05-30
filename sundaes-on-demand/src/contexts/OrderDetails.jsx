@@ -49,10 +49,12 @@ export function OrderDetailsProvider(props) {
     toppings: new Map(),
   });
 
+  const zeroCurrency = formatter.format(0);
+
   const [totals, setTotals] = useState({
-    scoops: formatter.format(0),
-    toppings: formatter.format(0),
-    grandTotal: formatter.format(0),
+    scoops: zeroCurrency,
+    toppings: zeroCurrency,
+    grandTotal: zeroCurrency,
   });
 
   useEffect(() => {

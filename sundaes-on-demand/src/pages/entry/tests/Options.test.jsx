@@ -1,9 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/test-utils";
+import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
 import { Options } from "../Options";
 
 // when you are waiting for something to appear asynchronously on the page, you must use "await" and findBy
 test("display image for each scoop options from the server", async () => {
-  render(<Options optionType="scoops" />);
+  render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
 
   // find images
   // use "await" and "find" when dealing with asynch els
@@ -18,7 +19,7 @@ test("display image for each scoop options from the server", async () => {
 });
 
 test("display image for each of topping options from the server", async () => {
-  render(<Options optionType="toppings" />);
+  render(<Options optionType="toppings" />, { wrapper: OrderDetailsProvider });
 
   const images = await screen.findAllByRole("img", { name: /topping$/i });
   expect(images).toHaveLength(3);
