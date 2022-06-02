@@ -12,8 +12,6 @@ export const Options = ({ optionType }) => {
   const [error, setError] = useState(false);
   const [orderDetails, updateItemCount] = useOrderDetails();
 
-  console.log('orderDetails: ', orderDetails);
-
   useEffect(() => {
     axios
       .get(`http://localhost:3030/${optionType}`)
