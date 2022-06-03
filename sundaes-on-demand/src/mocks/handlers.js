@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 export const handlers = [
-  rest.get("http://localhost:3030/scoops", (req, res, ctx) => {
+  rest.get("https://3030-pelousous-basicjestrtl-qb8chneooxi.ws-eu46.gitpod.io/scoops", (req, res, ctx) => {
     return res(
       ctx.json([
         { name: 'Chocolate', imagePath: '/images/chocolate.png' },
@@ -8,7 +8,7 @@ export const handlers = [
       ])
     )
   }),
-  rest.get("http://localhost:3030/toppings", (req, res, ctx) => {
+  rest.get("https://3030-pelousous-basicjestrtl-qb8chneooxi.ws-eu46.gitpod.io/toppings", (req, res, ctx) => {
     return res(
       ctx.json([
         { name: 'Cherries', imagePath: '/images/cherries.png' },

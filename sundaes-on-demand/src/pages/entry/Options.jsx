@@ -4,6 +4,8 @@ import { useOrderDetails, pricePerItem } from "../../contexts/OrderDetails";
 import AlertBanner from "../common/AlertBanner";
 import { ScoopOptions } from "./ScoopOptions";
 import { ToppingOptions } from "./ToppingOptions";
+import Row from "react-bootstrap/Row";
+import { formatter } from "../../utilities";
 
 // complete use component
 // with bootstrap col
@@ -14,7 +16,9 @@ export const Options = ({ optionType }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3030/${optionType}`)
+      .get(
+        `https://3030-pelousous-basicjestrtl-qb8chneooxi.ws-eu46.gitpod.io/${optionType}`
+      )
       .then((response) => {
         setOptions(response.data);
       })
@@ -32,23 +36,25 @@ export const Options = ({ optionType }) => {
   return (
     <div>
       <h2>{optionType}</h2>
-      <p>{pricePerItem[optionType]} each</p>
+      <p>{formatter.format(pricePerItem[optionType])} each</p>
       <p>
         {optionType} total: {orderDetails.totals[optionType]}
       </p>
-      {options &&
-        options.map((option) => {
-          return (
-            <ItemComponent
-              updateItemCount={(itemName, newItemCount) =>
-                updateItemCount(itemName, newItemCount, optionType)
-              }
-              key={option.name}
-              name={option.name}
-              imagePath={option.imagePath}
-            />
-          );
-        })}
+      <Row>
+        {options &&
+          options.map((option) => {
+            return (
+              <ItemComponent
+                updateItemCount={(itemName, newItemCount) =>
+                  updateItemCount(itemName, newItemCount, optionType)
+                }
+                key={option.name}
+                name={option.name}
+                imagePath={option.imagePath}
+              />
+            );
+          })}
+      </Row>
     </div>
   );
 };
