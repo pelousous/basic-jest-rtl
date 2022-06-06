@@ -16,5 +16,10 @@ export const handlers = [
         { name: 'Hot fudge', imagePath: '/images/hot-fudge.png' }
       ])
     )
+  }),
+  rest.post("https://3030-pelousous-basicjestrtl-qb8chneooxi.ws-eu46.gitpod.io/order", (req, res, ctx) => {
+    return res(
+      ctx.json({ "orderNumber": 7392822562 })
+    )
   })
 ]

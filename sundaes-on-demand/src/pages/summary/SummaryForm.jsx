@@ -28,6 +28,7 @@ export default function SummaryForm({ setOrderPhase }) {
         <Form.Check
           type="checkbox"
           label={checkboxLabel}
+          name="terms-and-conditions"
           onChange={() => setCheckedTerms(!checkedTerms)}
         />
       </Form.Group>
