@@ -12,6 +12,7 @@ const popover = (
 );
 
 export default function SummaryForm({ setOrderPhase }) {
+  const [checkedTerms, setCheckedTerms] = useState(false);
   const checkboxLabel = (
     <span>
       I agree to{" "}
@@ -24,9 +25,18 @@ export default function SummaryForm({ setOrderPhase }) {
   return (
     <Form>
       <Form.Group controlId="terms-and-conditions">
-        <Form.Check type="checkbox" label={checkboxLabel} />
+        <Form.Check
+          type="checkbox"
+          label={checkboxLabel}
+          onChange={() => setCheckedTerms(!checkedTerms)}
+        />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button
+        variant="primary"
+        type="submit"
+        onClick={() => setOrderPhase("complete")}
+        disabled={!checkedTerms}
+      >
         Confirm order
       </Button>
     </Form>
