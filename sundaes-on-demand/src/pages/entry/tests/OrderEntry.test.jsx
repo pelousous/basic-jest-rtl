@@ -15,7 +15,9 @@ test("handling error on scoop options and toppings options", async () => {
     )
   );
 
-  render(<OrderEntry />, { wrapper: OrderDetailsProvider });
+  render(<OrderEntry setOrderPhase={jest.fn()} />, {
+    wrapper: OrderDetailsProvider,
+  });
 
   await waitFor(async () => {
     const alerts = await screen.findAllByRole("alert");
