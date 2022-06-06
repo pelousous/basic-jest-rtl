@@ -11,9 +11,7 @@ const popover = (
   </Popover>
 );
 
-export default function SummaryForm() {
-  const [tcChecked, setTcChecked] = useState(false);
-
+export default function SummaryForm({ setOrderPhase }) {
   const checkboxLabel = (
     <span>
       I agree to{" "}
@@ -26,14 +24,9 @@ export default function SummaryForm() {
   return (
     <Form>
       <Form.Group controlId="terms-and-conditions">
-        <Form.Check
-          type="checkbox"
-          checked={tcChecked}
-          onChange={(e) => setTcChecked(e.target.checked)}
-          label={checkboxLabel}
-        />
+        <Form.Check type="checkbox" label={checkboxLabel} />
       </Form.Group>
-      <Button variant="primary" type="submit" disabled={!tcChecked}>
+      <Button variant="primary" type="submit">
         Confirm order
       </Button>
     </Form>
