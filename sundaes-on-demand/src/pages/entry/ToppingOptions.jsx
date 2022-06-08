@@ -10,7 +10,7 @@ export const ToppingOptions = ({ name, imagePath, updateItemCount }) => {
     <Col xs={12} sm={6} md={4} lg={3} style={{ textAlign: "center" }}>
       <img
         style={{ width: "75%" }}
-        src={`https://3030-pelousous-basicjestrtl-qb8chneooxi.ws-eu46.gitpod.io/${imagePath}`}
+        src={`https://3030-pelousous-basicjestrtl-qb8chneooxi.ws-eu47.gitpod.io/${imagePath}`}
         alt={`${name} topping`}
       />
       <Form.Group

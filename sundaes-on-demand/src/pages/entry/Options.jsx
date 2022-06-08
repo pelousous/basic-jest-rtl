@@ -17,7 +17,7 @@ export const Options = ({ optionType }) => {
   useEffect(() => {
     axios
       .get(
-        `https://3030-pelousous-basicjestrtl-qb8chneooxi.ws-eu46.gitpod.io/${optionType}`
+        `https://3030-pelousous-basicjestrtl-qb8chneooxi.ws-eu47.gitpod.io/${optionType}`
       )
       .then((response) => {
         setOptions(response.data);
