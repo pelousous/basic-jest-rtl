@@ -6,7 +6,7 @@ const app = express();
 
 // CORS for react app, assuming port 3000
 app.use(cors({
-  origin: 'https://3000-pelousous-basicjestrtl-qb8chneooxi.ws-eu46.gitpod.io',
+  origin: 'https://3000-pelousous-basicjestrtl-qb8chneooxi.ws-eu47.gitpod.io',
   credentials: true
 }))
 

@@ -1,7 +1,8 @@
 // CUSTOM RENDER https://testing-library.com/docs/react-testing-library/setup
-import { render, screen } from "../../../test-utils/test-utils";
+import { render, screen } from "@testing-library/react";
 import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
 import { Options } from "../Options";
+import userEvent from "@testing-library/user-event";
 
 // when you are waiting for something to appear asynchronously on the page, you must use "await" and findBy
 test("display image for each scoop options from the server", async () => {
@@ -33,4 +34,21 @@ test("display image for each of topping options from the server", async () => {
     "M&Ms topping",
     "Hot fudge topping",
   ]);
+});
+
+test("don't update scoops total if invalid input", async () => {
+  render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
+
+  const vanillaOptions = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+
+  await userEvent.clear(vanillaOptions);
+  await userEvent.type(vanillaOptions, "-1");
+
+  const scoopsTotal = await screen.findByText("scoops total: ", {
+    exact: false,
+  });
+
+  expect(scoopsTotal).toHaveTextContent("0.00");
 });

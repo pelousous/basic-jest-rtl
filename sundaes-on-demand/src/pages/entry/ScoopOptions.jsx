@@ -5,10 +5,13 @@ import Row from "react-bootstrap/Row";
 
 export const ScoopOptions = ({ name, imagePath, updateItemCount }) => {
   const handleChange = (e) => {
-    setInvalid(
-      e.target.value < 0 || e.target.value > 10 || e.target.value % 1 !== 0
-    );
-    updateItemCount(name, e.target.value);
+    const value = e.target.value;
+    const isInvalid =
+      value < 0 || value > 10 || value % 1 !== 0 || value === "";
+
+    setInvalid(isInvalid);
+
+    if (!isInvalid) updateItemCount(name, value);
   };
   const [invalid, setInvalid] = useState(false);
 
